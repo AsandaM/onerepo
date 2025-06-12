@@ -1,13 +1,11 @@
 import { UserManager } from 'oidc-client-ts';
 
 const cognitoAuthConfig = {
-    authority: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_sU3OO1y5d",
-    client_id: "78kf4olfs1b43inr005rvnv2bi",
-    redirect_uri: "http://localhost:5173/callback",
-    response_type: "code",
-    scope: "email openid phone",
-
-
+  authority: import.meta.env.VITE_COGNITO_AUTHORITY,
+  client_id: import.meta.env.VITE_COGNITO_CLIENT_ID,
+  redirect_uri: import.meta.env.VITE_COGNITO_REDIRECT_URI,
+  response_type: "code",
+  scope: "email openid phone",
 };
 
 
@@ -18,8 +16,8 @@ export const userManager = new UserManager ({
 });
 
 export async function signOutRedirect () {
-const clientId = "78kf4olfs1b43inr005rvnv2bi";
-const logoutUri = "http://localhost:5173/";
-const cognitoDomain = "https://us-east-1sU3OO1y5d.auth.us-east-1.amazoncognito.com";
-window. location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
-};
+  const clientId = import.meta.env.VITE_COGNITO_CLIENT_ID;
+  const logoutUri = import.meta.env.VITE_COGNITO_LOGOUT_URI;
+  const cognitoDomain = import.meta.env.VITE_COGNITO_DOMAIN;
+  window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+}
